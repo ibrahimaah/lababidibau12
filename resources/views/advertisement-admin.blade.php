@@ -34,7 +34,7 @@
     </div>
 </div>
        
-<script>
+{{-- <script>
     tinymce.init({
       selector: 'textarea',
       plugins: 'casechange  linkchecker autolink link image',
@@ -44,7 +44,7 @@
       tinycomments_author: 'Author name'
       
     });
-</script>
+</script> --}}
 @endsection
 
 
