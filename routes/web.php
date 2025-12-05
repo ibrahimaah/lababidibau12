@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
 use App\Http\Controllers\PortfolioImageController;
 use App\Http\Controllers\SliderController;
@@ -216,7 +217,13 @@ Route::middleware([Cookie::class])->group(function ()
     Route::post('/admin/job/update/{id}', 'App\Http\Controllers\Admin\JobController@update')->name('admin-job-update');
     Route::post('/admin/job/destroy/{id}', 'App\Http\Controllers\Admin\JobController@destroy')->name('admin-job-destroy');
     /////////////////////////////////////////////////////////////////
-
+    
+    // Settings Page
+    Route::get('admin/settings', [SettingController::class, 'index'])->name('admin.settings.index');
+    // Update Settings
+    Route::post('admin/settings', [SettingController::class, 'update'])->name('admin.settings.update');
+    
+    /////////////////////////////////////////////////////////////////
     //Route::get('/admin/whatsapp','UserController@index_whatsapp')->name('admin-whatsapp');
     //Route::post('/whatsapp/update','UserController@update_whatsapp')->name('update-whatsapp');
 

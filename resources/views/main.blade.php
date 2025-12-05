@@ -225,7 +225,7 @@
 
           <div class="col-sm d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-toggle="counter-up">{{ $counters->projects }}</span>
+              <span data-toggle="counter-up" class="text-primary">{{ $counters->projects }}</span>
               <p>Projekte</p>
             </div>
           </div>

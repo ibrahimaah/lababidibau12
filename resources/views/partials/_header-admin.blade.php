@@ -128,6 +128,12 @@
             <li>
                 <a class="dropdown-item" href="{{ route('admin-job-create') }}">Add Job</a>
             </li>
+
+            <li>
+              <a class="dropdown-item" href="{{ route('admin.settings.index') }}">
+                Settings
+              </a>
+            </li>
           
           </ul>
         </li> 

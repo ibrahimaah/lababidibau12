@@ -3,11 +3,12 @@
     <div class="container-fluid d-flex align-items-center justify-content-between">
 
       <a href="{{ route('main') }}" class="logo d-flex align-items-center  me-auto me-lg-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="{{ asset('assets/img/images/logo.jpg') }}"
-             class="rounded-circle"
-             alt="logo"> 
-        <h1>Lababidi Bau</h1>
+        <img src="{{ setting('logo') ? asset('storage/' . setting('logo')) : asset('assets/img/images/logo.jpg') }}"
+        class="rounded-circle"
+        alt="logo">
+   
+        <h1>{{ setting('site_name', 'Lababidi Bau') }}</h1>
+
       </a>
 
       <nav id="navbar" class="navbar">

@@ -1,14 +1,12 @@
 <style>
-@media only screen 
-      and (min-device-width : 320px) 
-      and (max-device-width : 800px){
-        .about-section {
-          padding-left:60px;
-        }
+  @media only screen and (min-device-width : 320px) and (max-device-width : 800px) {
+    .about-section {
+      padding-left: 60px;
+    }
   }
 </style>
 
- 
+
 
 
 <footer id="footer">
@@ -16,7 +14,7 @@
   <div class="footer-top">
     <div class="container">
       <div class="row">
-<!--
+        <!--
         <div class="col-sm footer-contact">
           <h3>LABABIDI BAU</h3>
           <p>
@@ -29,10 +27,12 @@
         </div>
 -->
         <div class="col-sm text-center">
-        <h3><a href="{{ route('main') }}">LABABIDI BAU</a></h3>
-        <a href="{{ route('main') }}">
-           <img src="{{ asset('assets/img/images/logo.jpg') }}" alt="" style="width:150px;height:150px">
-        </a>
+          <h3><a href="{{ route('main') }}">{{ setting('site_name', 'Lababidi Bau') }}</a></h3>
+          <a href="{{ route('main') }}">
+
+            <img src="{{ setting('logo_footer') ? asset('storage/' . setting('logo_footer')) : asset('assets/img/images/logo.jpg') }}"
+              alt="" style="width:150px;height:150px">
+          </a>
         </div>
         <div class="col-sm footer-links">
           <h4>NÜTZLICH</h4>
@@ -48,7 +48,9 @@
           <h4>SERVICES</h4>
           <ul>
             @foreach($categories as $category)
-            <li><i class="bx bx-chevron-right"></i><a href="{{ route('portfolio-image-category',$category->id) }}#bildergaleries">{{ $category->name }}</a></li>
+            <li><i class="bx bx-chevron-right"></i><a
+                href="{{ route('portfolio-image-category',$category->id) }}#bildergaleries">{{ $category->name }}</a>
+            </li>
             @endforeach
           </ul>
         </div>
@@ -59,7 +61,7 @@
             <li><i class="bx bx-chevron-right"></i> <a href="{{ route('privacy_policy') }}">Datenschutz</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="{{ route('imprint') }}">Impressum</a></li>
             <li><i class="bx bx-chevron-right"></i><a href="{{ route('main') }}#Kontakt">Kontakt</a></li>
-            
+
           </ul>
         </div>
 
@@ -74,5 +76,5 @@
       </div>
     </div>
   </div>
-@include('partials._footer_bottom')
+  @include('partials._footer_bottom')
 </footer>

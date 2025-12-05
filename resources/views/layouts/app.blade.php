@@ -54,8 +54,76 @@
     <script src="https://cdn.tiny.cloud/1/l86ybdpz6cixgvcq47wqlesdrxxda0gc8ktjfbintv0zzt7q/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <!------------------------------------------------------------------------------------------------------>
 
+ 
+        
     <link href="{{ asset('assets/css/header.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
+    <style>
+        :root {
+            --bs-primary: {{ setting('primary_color', '#0d6efd') }};
+            --bs-secondary: {{ setting('secondary_color', '#6c757d') }};
+            --bs-success: {{ setting('success_color', '#198754') }};
+            --bs-danger: {{ setting('danger_color', '#dc3545') }};
+            --bs-warning: {{ setting('warning_color', '#ffc107') }};
+            --bs-info: {{ setting('info_color', '#0dcaf0') }};
+            --bs-light: {{ setting('light_color', '#f8f9fa') }};
+            --bs-dark: {{ setting('dark_color', '#212529') }};
+            --bs-body-bg: {{ setting('background_color', '#ffffff') }};
+            --bs-body-color: {{ setting('text_color', '#212529') }};
+        }
+        
+        /* Buttons */
+        .btn-primary { background-color: var(--bs-primary) !important; border-color: var(--bs-primary) !important; }
+        .btn-secondary { background-color: var(--bs-secondary) !important; border-color: var(--bs-secondary) !important; }
+        .btn-success { background-color: var(--bs-success) !important; border-color: var(--bs-success) !important; }
+        .btn-danger { background-color: var(--bs-danger) !important; border-color: var(--bs-danger) !important; }
+        .btn-warning { background-color: var(--bs-warning) !important; border-color: var(--bs-warning) !important; }
+        .btn-info { background-color: var(--bs-info) !important; border-color: var(--bs-info) !important; }
+        .btn-light { background-color: var(--bs-light) !important; border-color: var(--bs-light) !important; }
+        .btn-dark { background-color: var(--bs-dark) !important; border-color: var(--bs-dark) !important; }
+        
+        /* Text */
+        .text-primary { color: var(--bs-primary) !important; }
+        .text-secondary { color: var(--bs-secondary) !important; }
+        .text-success { color: var(--bs-success) !important; }
+        .text-danger { color: var(--bs-danger) !important; }
+        .text-warning { color: var(--bs-warning) !important; }
+        .text-info { color: var(--bs-info) !important; }
+        .text-light { color: var(--bs-light) !important; }
+        .text-dark { color: var(--bs-dark) !important; }
+        
+        /* Backgrounds */
+        .bg-primary { background-color: var(--bs-primary) !important; }
+        .bg-secondary { background-color: var(--bs-secondary) !important; }
+        .bg-success { background-color: var(--bs-success) !important; }
+        .bg-danger { background-color: var(--bs-danger) !important; }
+        .bg-warning { background-color: var(--bs-warning) !important; }
+        .bg-info { background-color: var(--bs-info) !important; }
+        .bg-light { background-color: var(--bs-light) !important; }
+        .bg-dark { background-color: var(--bs-dark) !important; }
+        
+        /* Borders */
+        .border-primary { border-color: var(--bs-primary) !important; }
+        .border-secondary { border-color: var(--bs-secondary) !important; }
+        .border-success { border-color: var(--bs-success) !important; }
+        .border-danger { border-color: var(--bs-danger) !important; }
+        .border-warning { border-color: var(--bs-warning) !important; }
+        .border-info { border-color: var(--bs-info) !important; }
+        .border-light { border-color: var(--bs-light) !important; }
+        .border-dark { border-color: var(--bs-dark) !important; }
+        
+        /* Alerts */
+        .alert-primary { background-color: var(--bs-primary) !important; border-color: var(--bs-primary) !important; color: #fff !important; }
+        .alert-secondary { background-color: var(--bs-secondary) !important; border-color: var(--bs-secondary) !important; color: #fff !important; }
+        .alert-success { background-color: var(--bs-success) !important; border-color: var(--bs-success) !important; color: #fff !important; }
+        .alert-danger { background-color: var(--bs-danger) !important; border-color: var(--bs-danger) !important; color: #fff !important; }
+        .alert-warning { background-color: var(--bs-warning) !important; border-color: var(--bs-warning) !important; color: #212529 !important; }
+        .alert-info { background-color: var(--bs-info) !important; border-color: var(--bs-info) !important; color: #212529 !important; }
+        .alert-light { background-color: var(--bs-light) !important; border-color: var(--bs-light) !important; color: #212529 !important; }
+        .alert-dark { background-color: var(--bs-dark) !important; border-color: var(--bs-dark) !important; color: #fff !important; }
+        </style>
+        
     <title>@yield('title','LABABIDI BAU')</title>
     
 </head>
