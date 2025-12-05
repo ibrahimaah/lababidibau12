@@ -25,7 +25,8 @@
     <!----------------------->
 
     <!-- Vendor CSS Files -->
-    <!-- <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> -->
+    {{-- <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
+
     <link href="{{ asset('assets/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
@@ -56,13 +57,13 @@
 
  
         
-    <link href="{{ asset('assets/css/header.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/css/header.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
     <style>
         :root {
-            --bs-primary: {{ setting('primary_color', '#0d6efd') }};
-            --bs-secondary: {{ setting('secondary_color', '#6c757d') }};
+            --bs-primary: {{ setting('primary_color', '#6c757d') }};
+            --bs-secondary: {{ setting('secondary_color', '#0d6efd') }};
             --bs-success: {{ setting('success_color', '#198754') }};
             --bs-danger: {{ setting('danger_color', '#dc3545') }};
             --bs-warning: {{ setting('warning_color', '#ffc107') }};

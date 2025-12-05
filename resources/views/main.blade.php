@@ -5,23 +5,24 @@
 
 
   <!-- ======= Header ======= -->
-@isset($social)
+{{-- @isset($social)
   @include('partials._header',['social',$social])
 @else
   @include('partials._header')
-@endisset
+@endisset --}}
 
+@include('partials._navbar')
 
 
   <!-- End Header -->
 
   <style>
     /** About Us Services */
-    .double-true{
+    /* .double-true{
       font-size: 17px;
       color: #ee1a36;
       line-height: 2;
-    }
+    } */
     .card-img-top {
     width: 100%;
     height: 100%;
@@ -47,7 +48,7 @@
     color: #fff;
     text-transform: uppercase;
     padding-left: 5px;
-    border-left: 4px solid #ee1a36; 
+    border-left: 4px solid var(--bs-secondary); 
     }
     .business-hours li {
     color: #fff;
@@ -298,7 +299,7 @@
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.6109694272823!2d7.047321315162549!3d50.63434338197923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bee2b513b9f14d%3A0x18de3272a28c82b9!2sZypressenweg%203%2C%2053340%20Meckenheim%2C%20Germany!5e0!3m2!1sen!2sus!4v1615403481751!5m2!1sen!2sus" frameborder="0" allowfullscreen></iframe>
 </div>
 
-<section id="Kontakt" class="container contact bg-gradient pt-5 pb-3">
+<section id="Kontakt" class="container contact bg-primary pt-5 pb-3">
   <div class="container" data-aos="fade-up">
 
    

@@ -1,18 +1,18 @@
-:root {
-    --main-color: #ee1a36;
+/* :root {
+    --bs-primary: #ee1a36;
     --second-color: #222222;
-}
+} */
 
 body {
     font-family: "Open Sans", sans-serif;
     color: #444;
-    padding-top: 100px;
+    /* padding-top: 100px; */
 }
 a {
     color: #2d333b;
 }
 a:hover {
-    color: var(--main-color);
+    color: var(--bs-primary);
     text-decoration: none;
 }
 h1,
@@ -43,7 +43,7 @@ h6 {
     transition: all 0.4s;
 }
 .back-to-top i:hover {
-    background: var(--main-color);
+    background: var(--bs-primary);
     color: #fff;
 }
 
@@ -98,7 +98,7 @@ section {
     left: 0;
     top: 2px;
     font-size: 20px;
-    color: var(--main-color);
+    color: var(--bs-primary);
     line-height: 1;
 }
 .about .content p:last-child {
@@ -114,14 +114,14 @@ section {
     border-radius: 5px;
     transition: 0.3s;
     line-height: 1;
-    color: var(--main-color);
+    color: var(--bs-primary);
     -webkit-animation-delay: 0.8s;
     animation-delay: 0.8s;
     margin-top: 6px;
-    border: 2px solid var(--main-color);
+    border: 2px solid var(--bs-primary);
 }
 .about .content .btn-learn-more:hover {
-    background: var(--main-color);
+    background: var(--bs-primary);
     color: #fff;
     text-decoration: none;
 }
@@ -137,7 +137,7 @@ section {
     line-height: 48px;
     display: block;
     font-weight: 700;
-    color: var(--main-color);
+    color: var(--bs-primary);
     margin-left: 80px;
     margin: auto;
 }
@@ -167,7 +167,7 @@ section {
 }
 .about-video .content ul i {
     font-size: 24px;
-    color: var(--main-color);
+    color: var(--bs-primary);
     position: absolute;
     left: 0;
     top: -2px;
@@ -178,7 +178,7 @@ section {
 .about-video .play-btn {
     width: 94px;
     height: 94px;
-    background: radial-gradient(var(--main-color) 50%, rgba(36, 135, 206, 0.4) 52%);
+    background: radial-gradient(var(--bs-primary) 50%, rgba(36, 135, 206, 0.4) 52%);
     border-radius: 50%;
     display: block;
     position: absolute;
@@ -223,7 +223,7 @@ section {
     background: rgba(198, 16, 0, 0);
 }
 .about-video .play-btn:hover::after {
-    border-left: 15px solid var(--main-color);
+    border-left: 15px solid var(--bs-primary);
     transform: scale(20);
 }
 .about-video .play-btn:hover::before {
@@ -388,7 +388,7 @@ section {
     fill: #11dbcf;
 }
 .cta {
-    background: var(--main-color);
+    background: var(--bs-primary);
     background-size: cover;
     padding: 60px 0;
 }
@@ -415,7 +415,7 @@ section {
 }
 .cta .cta-btn:hover {
     background: #fff;
-    color: var(--main-color);
+    color: var(--bs-primary);
 }
 .portfolio .portfolio-item {
     margin-bottom: 30px;
@@ -443,7 +443,7 @@ section {
 }
 .portfolio #portfolio-flters li:hover,
 .portfolio #portfolio-flters li.filter-active {
-    color: var(--main-color);
+    color: var(--bs-primary);
 }
 .portfolio #portfolio-flters li:last-child {
     margin-right: 0;
@@ -589,7 +589,7 @@ section {
 .contact .info .email:hover i,
 .contact .info .address:hover i,
 .contact .info .phone:hover i {
-    background: var(--main-color);
+    background: var(--bs-primary);
     color: #fff;
 }
 .contact .php-email-form {
@@ -652,7 +652,7 @@ section {
 }
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus {
-    border-color: var(--main-color);
+    border-color: var(--bs-primary);
 }
 .contact .php-email-form input {
     height: 44px;
@@ -669,7 +669,7 @@ section {
     border-radius: 4px;
 }
 .contact .php-email-form button[type="submit"]:hover {
-    background: var(--main-color);
+    background: var(--bs-primary);
 }
 @-webkit-keyframes animate-loading {
     0% {
@@ -732,7 +732,7 @@ section {
 }
 #footer .footer-top .footer-links ul i {
     padding-right: 2px;
-    color: var(--main-color);
+    color: var(--bs-primary);
     font-size: 18px;
     line-height: 1;
 }
@@ -752,7 +752,7 @@ section {
 }
 #footer .footer-top .footer-links ul a:hover {
     text-decoration: none;
-    color: var(--main-color);
+    color: var(--bs-primary);
 }
 #footer .footer-newsletter {
     font-size: 15px;
@@ -787,7 +787,7 @@ section {
     background: none;
     font-size: 16px;
     padding: 0 20px 2px 20px;
-    background: var(--main-color);
+    background: var(--bs-primary);
     color: #fff;
     transition: 0.3s;
     border-radius: 0 5px 5px 0;
@@ -816,7 +816,7 @@ section {
     transition: 0.3s;
 }
 .social-links a:hover {
-    background: var(--main-color);
+    background: var(--bs-primary);
     color: #fff;
     text-decoration: none;
 }

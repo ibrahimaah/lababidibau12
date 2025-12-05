@@ -33,20 +33,20 @@
       <!-- .navbar -->
 
       <div class="header-social-links">
-      @if($social_media->isNotEmpty())
-        @foreach($social_media as $social)
-          @if($social->active)
-            @if(!$social->icon)
-              <a href="<?=$social->link?>"><i class="bi bi-<?=$social->name?>"></i></a>
-            @else 
-              <a href="{{ $social->link }}">
-                <img src="{{ asset('storage/images/social_media_icons/'.$social->icon) }}"
-                    alt="{{ $social->name }}" style="width:40px;height:40px">
-              </a>
+        @if($social_media->isNotEmpty())
+            @foreach($social_media as $social)
+            @if($social->active)
+                @if(!$social->icon)
+                <a href="<?=$social->link?>"><i class="bi bi-<?=$social->name?>"></i></a>
+                @else 
+                <a href="{{ $social->link }}">
+                    <img src="{{ asset('storage/images/social_media_icons/'.$social->icon) }}"
+                        alt="{{ $social->name }}" style="width:40px;height:40px">
+                </a>
+                @endif
             @endif
-          @endif
-        @endforeach
-      @endif
+            @endforeach
+        @endif
       </div>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
