@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\Slider;
+use Exception;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -15,103 +17,73 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $images = Slider::all();
-        return view('slider',compact('images'));
+        $sliders = Slider::all(); // or your slider model
+        
+        // Get slider status using your helper function
+        $slider_status = setting('slider_enabled', false);
+        
+        return view('admin.home.slider.index', compact('sliders', 'slider_status'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'image' => 'required|image',
         ]);
-    
-        if($request->image){
-            
-            $image = new Slider();
-            
-            $imageName = $image->img_name.'_image'.time().'.'.$request->image->getClientOriginalExtension();
-            //$request->image->storeAs('images',$imageName, 'public');
-            $request->image->move(public_path('storage/images/slider'), $imageName);
 
-            $imag = Image::make(public_path('storage/images/slider/'.$imageName))->resize(1000, 500);
-            $imag->save();
+        $slider = Slider::create(); // now valid (no required fields)
 
-            $image->img_name = $imageName;
-            
-            if($image->save())
-            {
-               return back()->with('success','Slider Image added successfully :)'); 
-            }
-            
-            return back()->with('faild','Slider Image added faild :('); 
+        $slider->addMediaFromRequest('image')
+            ->toMediaCollection('slider-images');
+
+        return back()->with('success', 'Slider Image added successfully :)');
+    }
+
+   
+    public function destroy($id)
+    {
+        try {
+            $slider = Slider::findOrFail($id);
+
+            // Remove all images from the collection
+            $slider->clearMediaCollection('slider-images');
+
+            // Optionally, delete the slider record itself
+            $slider->delete();
+
+            return back()->with('success-removed', 'Slider image removed successfully.');
+        } catch (Exception $ex) {
+            return back()->with('faild-removed', 'Image Can\'t be removed :(');
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Slider  $slider
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Slider $slider)
+    public function toggleSlider(Request $request)
     {
-        //
-    }
+        try {
+            $status = $request->has('slider_status'); // true when checkbox is checked
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Slider  $slider
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Slider $slider)
-    {
-        //
-    }
+            // Check if setting already exists
+            $existingSetting = Setting::where('key', 'slider_enabled')->first();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Slider  $slider
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            if ($existingSetting) {
+                // Update existing setting
+                $existingSetting->update([
+                    'value' => $status ? '1' : '0',
+                    'updated_at' => now()
+                ]);
+            } else {
+                // Create new setting
+                Setting::create([
+                    'key' => 'slider_enabled',
+                    'value' => $status ? '1' : '0',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Slider  $slider
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $image = Slider::findOrFail($id);
-        if(file_exists(public_path("storage/images/slider/$image->img_name"))){
-            unlink(public_path("storage/images/slider/$image->img_name"));
-            $image->delete();
-            return back()->with('success-removed','Image Removed Successfully :)');
-        } 
-    
-        return back()->with('faild-removed','Image Can\'t be removed :(');
+            return back()->with('slider_toggle_status', $status ? 'enabled' : 'disabled');
+        } catch (\Exception $e) {
+            return back()->with('faild', 'Failed to update slider status. Please try again.');
+        }
     }
 }

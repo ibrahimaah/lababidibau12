@@ -132,39 +132,11 @@
   <div class="top-img w-100">
     <img src="{{ asset('assets/img/images/a.jpg') }}" alt="top image" class="w-100">
   </div>
-  @if($images->isNotEmpty())
-  <div class="container d-none d-md-block">
-    <div id="demo" class="carousel slide" data-ride="carousel">
 
-      <!-- Indicators -->
-      <ul class="carousel-indicators">
-        @foreach($images as $image)
-          <li data-target="#demo" data-slide-to="<?=$loop->first ? '0' : $loop->index;?>" class="<?=$loop->first ? 'active' :'';?>"></li>
-        @endforeach
-      </ul>
 
-      <!-- The slideshow -->
-      <div class="carousel-inner" style="border-radius: 50px;">
+@include('partials.main-page._slider')
 
-        
-        @foreach($images as $image)
-          <div class="carousel-item <?=$loop->first ? 'active' :'';?>">
-            <img src="{{ asset('storage/images/slider/'.$image->img_name) }}" alt="Image<?=$image->id?>">
-          </div>
-        @endforeach
-      </div>
 
-      <!-- Left and right controls -->
-      <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
-
-    </div>
-  </div>
-  @endif
   <main id="main">
 
 

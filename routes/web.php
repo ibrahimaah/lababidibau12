@@ -20,6 +20,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ImageController;
 use App\Http\Middleware\Cookie;
+use App\Http\Controllers\VideoController;
 
 // use App\Models\SocialMediaLink;
 
@@ -35,52 +36,52 @@ use App\Http\Middleware\Cookie;
 */
 
 
-Route::get('/', [MainController::class,'index'])->name('main');
+Route::get('/', [MainController::class, 'index'])->name('main');
 // Route::get('/portfolio-image/{category_id}',[PortfolioImageController::class , 'getSelectedCategory'])->name('portfolio-image-with-category');
-Route::get('/Fotogalerie', [PortfolioImageController::class , 'index'])->name('portfolio-image');
-Route::get('/Fotogalerie/{category_id}', [PortfolioImageController::class , 'getCategoryById'])->name('portfolio-image-category');
-Route::get('/Videogalerie', [PortfolioVideoController::class,'index'])->name('portfolio-video');
-Route::get('/datenschutz', [PrivacyController::class,'index'])->name('privacy_policy');
-Route::get('/impressum', [ImprintController::class,'index'])->name('imprint');
-Route::get('/advertisement', [AdvertisementController::class,'index'])->name('advertisement');
-Route::get('/job', [JobController::class,'index'])->name('job');
+Route::get('/Fotogalerie', [PortfolioImageController::class, 'index'])->name('portfolio-image');
+Route::get('/Fotogalerie/{category_id}', [PortfolioImageController::class, 'getCategoryById'])->name('portfolio-image-category');
+Route::get('/Videogalerie', [PortfolioVideoController::class, 'index'])->name('portfolio-video');
+Route::get('/datenschutz', [PrivacyController::class, 'index'])->name('privacy_policy');
+Route::get('/impressum', [ImprintController::class, 'index'])->name('imprint');
+Route::get('/advertisement', [AdvertisementController::class, 'index'])->name('advertisement');
+Route::get('/job', [JobController::class, 'index'])->name('job');
 //Route::get('/advertisement', function(){ return 'You Can Not Access This Page'; });
 
 /////////////////////////////////////////////////////////////////////////////////////////
-Route::middleware([Cookie::class])->group(function () 
-{
-    Route::get('admin', [SliderController::class,'index']);
+Route::middleware([Cookie::class])->group(function () {
+    Route::get('admin', [SliderController::class, 'index']);
 
-    Route::get('admin/home/category',[CategoryController::class,'index'])->name('admin-category');
-    Route::get('admin/category/create', [CategoryController::class,'create'])->name('create-category');
-    Route::get('admin/category/edit/{id}', [CategoryController::class,'edit'])->name('edit-category');
-    Route::post('admin/category/store', [CategoryController::class,'store'])->name('store-category');
-    Route::post('admin/category/update/{id}', [CategoryController::class,'update'])->name('update-category');
-    Route::post('admin/category/remove/{id}', [CategoryController::class,'destroy'])->name('remove-category');
+    Route::get('admin/home/category', [CategoryController::class, 'index'])->name('admin-category');
+    Route::get('admin/category/create', [CategoryController::class, 'create'])->name('create-category');
+    Route::get('admin/category/edit/{id}', [CategoryController::class, 'edit'])->name('edit-category');
+    Route::post('admin/category/store', [CategoryController::class, 'store'])->name('store-category');
+    Route::post('admin/category/update/{id}', [CategoryController::class, 'update'])->name('update-category');
+    Route::post('admin/category/remove/{id}', [CategoryController::class, 'destroy'])->name('remove-category');
 
-    Route::get('/admin/image', [ImageController::class,'index'])->name('admin-image');
-    Route::post('/image/store', [ImageController::class,'store'])->name('store-image');
-    Route::post('/image/remove/{id}', [ImageController::class,'destroy'])->name('remove-image');
+    Route::get('/admin/image', [ImageController::class, 'index'])->name('admin-image');
+    Route::post('/image/store', [ImageController::class, 'store'])->name('store-image');
+    Route::post('/image/remove/{id}', [ImageController::class, 'destroy'])->name('remove-image');
 
-    Route::get('/admin/video', 'App\Http\Controllers\VideoController@index')->name('admin-video');
-    Route::post('/video/store', 'App\Http\Controllers\VideoController@store')->name('store-video');
-    Route::post('/video/remove/{id}', 'App\Http\Controllers\VideoController@destroy')->name('remove-video');
+    Route::get('/admin/video', [VideoController::class, 'index'])->name('admin-video');
+    Route::post('/video/store', [VideoController::class, 'store'])->name('store-video');
+    Route::post('/video/remove/{id}', [VideoController::class, 'destroy'])->name('remove-video');
 
-    Route::get('/admin/slider', 'App\Http\Controllers\SliderController@index')->name('admin-slider');
-    Route::post('/slider/store', 'App\Http\Controllers\SliderController@store')->name('store-slider-image');
-    Route::post('/slider/remove/{id}', 'App\Http\Controllers\SliderController@destroy')->name('remove-slider-image');
+    Route::get('/admin/slider', [SliderController::class, 'index'])->name('admin-slider');
+    Route::post('/admin/toggle-slider', [SliderController::class, 'toggleSlider'])->name('toggle-slider');
+    Route::post('/slider/store', [SliderController::class, 'store'])->name('store-slider-image');
+    Route::post('/slider/remove/{id}', [SliderController::class, 'destroy'])->name('remove-slider-image');
 
     /////////////////// -- About page in Admin -- //////////////////////////
 
     /////-- About Section --/////
     Route::get(
         '/admin/about/edit',
-         [AboutController::class, 'edit']
+        [AboutController::class, 'edit']
     )->name('edit-admin-about');
 
     Route::post(
-        '/about/update/{id}'
-    , [AboutController::class, 'update']
+        '/about/update/{id}',
+        [AboutController::class, 'update']
     )->name('update-admin-about');
 
 
@@ -88,17 +89,17 @@ Route::middleware([Cookie::class])->group(function ()
     /////-- Services Section --/////
     Route::get(
         '/admin/about/services',
-         [ServiceController::class, 'index']
+        [ServiceController::class, 'index']
     )->name('admin-about-services');
 
     Route::post(
         '/admin/about/services/store',
-         [ServiceController::class, 'store']
+        [ServiceController::class, 'store']
     )->name('store-admin-about-service');
 
     Route::post(
         '/admin/about/services/destroy/{id}',
-         [ServiceController::class, 'destroy']
+        [ServiceController::class, 'destroy']
     )->name('remove-admin-about-service');
 
 
@@ -112,9 +113,9 @@ Route::middleware([Cookie::class])->group(function ()
     ////////////////////-- Social Media Links page in admin  --///////////////////////////////
     Route::get(
         '/admin/social-media-links',
-         [SocialMediaLinkController::class, 'index']
+        [SocialMediaLinkController::class, 'index']
     )->name('admin-social-media-links');
-    
+
     Route::get(
         '/admin/social-media-link/create',
         [SocialMediaLinkController::class, 'create']
@@ -122,29 +123,29 @@ Route::middleware([Cookie::class])->group(function ()
 
     Route::post(
         '/admin/social-media-link/store',
-     [SocialMediaLinkController::class, 'store']
+        [SocialMediaLinkController::class, 'store']
     )->name('admin-social-media-link-store');
-    
+
     Route::get(
         '/admin/social-media-link/edit/{id}',
-     [SocialMediaLinkController::class, 'edit']
+        [SocialMediaLinkController::class, 'edit']
     )->name('admin-social-media-link-edit');
-    
+
     Route::post(
         '/admin/social-media-link/update/{id}',
-     [SocialMediaLinkController::class, 'update']
+        [SocialMediaLinkController::class, 'update']
     )->name('admin-social-media-link-update');
-    
+
     Route::post(
         '/admin/social-media-link/destroy/{id}',
-     [SocialMediaLinkController::class, 'destroy']
+        [SocialMediaLinkController::class, 'destroy']
     )->name('admin-social-media-link-destroy');
-    
+
     Route::post(
         '/admin/social-media-link/activate/{id}',
-     [SocialMediaLinkController::class, 'activate']
+        [SocialMediaLinkController::class, 'activate']
     )->name('admin-social-media-link-activate');
-    
+
     // Route::get(
     //     '/social-media-links',
     //      [SocialMediaLinkController::class, 'getSocialMediaLinksToUser']
@@ -217,12 +218,12 @@ Route::middleware([Cookie::class])->group(function ()
     Route::post('/admin/job/update/{id}', 'App\Http\Controllers\Admin\JobController@update')->name('admin-job-update');
     Route::post('/admin/job/destroy/{id}', 'App\Http\Controllers\Admin\JobController@destroy')->name('admin-job-destroy');
     /////////////////////////////////////////////////////////////////
-    
+
     // Settings Page
     Route::get('admin/settings', [SettingController::class, 'index'])->name('admin.settings.index');
     // Update Settings
     Route::post('admin/settings', [SettingController::class, 'update'])->name('admin.settings.update');
-    
+
     /////////////////////////////////////////////////////////////////
     //Route::get('/admin/whatsapp','UserController@index_whatsapp')->name('admin-whatsapp');
     //Route::post('/whatsapp/update','UserController@update_whatsapp')->name('update-whatsapp');

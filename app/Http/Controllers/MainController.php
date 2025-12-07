@@ -20,7 +20,7 @@ class MainController extends Controller
         return view('main', [
             'about_us' => About::first(),
             'services' => Service::all(),
-            'images' => Slider::all(),
+            'sliders' => Slider::with('media')->get(),
             'contacts' => Contact::first(),
             'categories' => Category::all(),
             'counters' => Counter::first(),
