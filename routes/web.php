@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\MainController;
 // use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\HeroImageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
@@ -71,6 +72,14 @@ Route::middleware([Cookie::class])->group(function () {
     Route::post('/slider/store', [SliderController::class, 'store'])->name('store-slider-image');
     Route::post('/slider/remove/{id}', [SliderController::class, 'destroy'])->name('remove-slider-image');
 
+    
+        // Hero Image Routes
+    Route::get('admin/hero-image', [HeroImageController::class, 'index'])->name('admin.hero-image.index');
+    Route::put('admin/hero-image', [HeroImageController::class, 'update'])->name('admin.hero-image.update');
+    Route::post('admin/hero-image/toggle', [HeroImageController::class, 'toggle'])->name('admin.hero-image.toggle');
+    Route::delete('admin/hero-image', [HeroImageController::class, 'destroy'])->name('admin.hero-image.destroy');
+   
+    //
     /////////////////// -- About page in Admin -- //////////////////////////
 
     /////-- About Section --/////

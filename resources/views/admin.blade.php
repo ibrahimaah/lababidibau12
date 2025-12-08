@@ -4,7 +4,7 @@
 @section('content')
 
 
-    @include('partials._header-admin')
+    @include('partials._navbar_admin')
 	<style>
 
 	</style>

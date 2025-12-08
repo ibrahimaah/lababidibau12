@@ -24,6 +24,12 @@
             </li>
 
             <li>
+              <a class="dropdown-item" href="{{ route('admin.hero-image.index') }}">
+                Hero Image
+              </a>
+            </li>
+
+            <li>
               <a class="dropdown-item" href="{{ route('edit-admin-about') }}">
                 About
               </a>

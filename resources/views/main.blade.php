@@ -129,10 +129,9 @@
   </style>
 
 
-  <div class="top-img w-100">
-    <img src="{{ asset('assets/img/images/a.jpg') }}" alt="top image" class="w-100">
-  </div>
 
+
+@include('partials.main-page._hero_img')
 
 @include('partials.main-page._slider')
 
