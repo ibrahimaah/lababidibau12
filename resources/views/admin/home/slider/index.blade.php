@@ -2,6 +2,8 @@
 
 @section('admin-content')
 
+@use(App\Enums\PageFeatureEnum)
+
 <div class="container-fluid py-4">
     <div class="row mb-4">
         <div class="col-12">
@@ -17,11 +19,11 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" 
                                        id="sliderToggle" name="slider_status" 
-                                       {{ setting('slider_enabled', false) ? 'checked' : '' }}
+                                       {{ PageFeatureEnum::HOME_SLIDER->is_enabled() ? 'checked' : '' }}
                                        onchange="document.getElementById('sliderToggleForm').submit()">
                                 <label class="form-check-label" for="sliderToggle">
                                     <span id="sliderStatusText">
-                                        {{ setting('slider_enabled', false) ? 'ON' : 'OFF' }}
+                                        {{ PageFeatureEnum::HOME_SLIDER->is_enabled() ? 'ON' : 'OFF' }}
                                     </span>
                                 </label>
                             </div>

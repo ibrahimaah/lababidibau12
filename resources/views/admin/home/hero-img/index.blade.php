@@ -2,6 +2,8 @@
 
 @section('admin-content')
 
+@use(App\Enums\PageFeatureEnum)
+
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-12">
@@ -13,7 +15,7 @@
                 <div class="d-flex align-items-center gap-3">
                     @php
                         $heroMedia = $heroImage ? $heroImage->getFirstMedia('hero') : null;
-                        $heroEnabled = setting('hero_enabled', 'true') === 'true';
+                        $heroEnabled = PageFeatureEnum::HOME_HERO_IMG->is_enabled();
                     @endphp
                     
                     @if($heroMedia)

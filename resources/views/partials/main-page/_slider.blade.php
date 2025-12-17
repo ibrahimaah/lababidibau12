@@ -1,4 +1,6 @@
-@if(setting('slider_enabled', false) && $sliders->isNotEmpty())
+@use(App\Enums\PageFeatureEnum)
+
+@if(PageFeatureEnum::HOME_SLIDER->is_enabled() && $sliders->isNotEmpty())
 <div class="container">
     <div id="slider" class="carousel slide carousel-fade" data-bs-ride="carousel">
 

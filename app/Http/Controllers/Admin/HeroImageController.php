@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PageFeatureEnum;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\HeroImage;
@@ -15,14 +16,10 @@ class HeroImageController extends Controller
     public function index()
     {
         // Get the current hero image
-        $heroImage = HeroImage::first();
-        
-        // Use your helper function to get hero status (default to 'true' string)
-        $heroEnabled = setting('hero_enabled', 'true') === 'true';
+        $heroImage = HeroImage::first(); 
 
         return view('admin.home.hero-img.index', [
-            'heroImage' => $heroImage,
-            'heroStatus' => $heroEnabled
+            'heroImage' => $heroImage
         ]);
     }
 
@@ -64,29 +61,14 @@ class HeroImageController extends Controller
 
     public function toggle()
     {
-        try {
-            // Get current status using your helper function
-            $currentValue = setting('hero_enabled', 'true');
-            
-            // Toggle the value
-            $newValue = ($currentValue === 'true') ? 'false' : 'true';
-            
-            // Update or create the setting
-            Setting::updateOrCreate(
-                ['key' => 'hero_enabled'],
-                ['value' => $newValue]
-            );
-            
-            $newStatus = $newValue === 'true' ? 'enabled' : 'disabled';
-
-            return redirect()->route('admin.hero-image.index')
-                ->with('hero_toggle_status', $newStatus);
-                
-        } catch (Exception $e) {
-            return redirect()->back()
-                ->with('error', 'Failed to toggle hero image: ' . $e->getMessage());
-        }
+        $feature = PageFeatureEnum::HOME_HERO_IMG;
+        $feature->toggle();
+    
+        return redirect()
+            ->route('admin.hero-image.index')
+            ->with('hero_toggle_status', $feature->status());
     }
+    
 
     public function destroy()
     {

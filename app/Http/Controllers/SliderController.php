@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PageFeatureEnum;
 use App\Models\Setting;
 use App\Models\Slider;
 use Exception;
@@ -59,31 +60,14 @@ class SliderController extends Controller
 
     public function toggleSlider(Request $request)
     {
-        try {
-            $status = $request->has('slider_status'); // true when checkbox is checked
-
-            // Check if setting already exists
-            $existingSetting = Setting::where('key', 'slider_enabled')->first();
-
-            if ($existingSetting) {
-                // Update existing setting
-                $existingSetting->update([
-                    'value' => $status ? '1' : '0',
-                    'updated_at' => now()
-                ]);
-            } else {
-                // Create new setting
-                Setting::create([
-                    'key' => 'slider_enabled',
-                    'value' => $status ? '1' : '0',
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
-            }
-
-            return back()->with('slider_toggle_status', $status ? 'enabled' : 'disabled');
-        } catch (\Exception $e) {
-            return back()->with('faild', 'Failed to update slider status. Please try again.');
-        }
+        $enabled = $request->boolean('slider_status');
+    
+        PageFeatureEnum::HOME_SLIDER->set($enabled);
+    
+        return back()->with(
+            'slider_toggle_status',
+            $enabled ? 'enabled' : 'disabled'
+        );
     }
+    
 }
