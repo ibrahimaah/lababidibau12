@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PageFeatureEnum;
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -13,40 +15,9 @@ class AboutController extends Controller
      */
     public function index()
     {
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id=null)
-    {
-        return view('admin.about.edit', [
-            'about_us' => About::first()
+        return view('admin.home.about.index', [
+            'about_us' => About::first(),
+            'services' => Service::all()
         ]);
     }
 
@@ -66,11 +37,15 @@ class AboutController extends Controller
         return back()->with('faild','Faild :('); 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function toggleAbout(Request $request)
     {
-        
+        $enabled = $request->boolean('about_status');
+    
+        PageFeatureEnum::HOME_ABOUT->set($enabled);
+    
+        return back()->with(
+            'about_toggle_status',
+            $enabled ? 'enabled' : 'disabled'
+        );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PageFeatureEnum;
 use App\Models\Counter;
 use Illuminate\Http\Request;
 
@@ -17,11 +18,23 @@ class CounterController extends Controller
         $counters = Counter::find(1);
         if($counters)
         {
-            return view('counter')->withCounters($counters);
+            return view('admin.home.counters.index',compact('counters'));
         }
         return view('counter');
     }
 
+    public function toggleCounters(Request $request)
+    {
+        $enabled = $request->boolean('counters_status');
+    
+        PageFeatureEnum::HOME_COUNTERS->set($enabled);
+    
+        return back()->with(
+            'counters_toggle_status',
+            $enabled ? 'enabled' : 'disabled'
+        );
+    }
+ 
     /**
      * Show the form for creating a new resource.
      *

@@ -1,7 +1,7 @@
 @use(App\Enums\PageFeatureEnum)
 
 @if(PageFeatureEnum::HOME_SLIDER->is_enabled() && $sliders->isNotEmpty())
-<div class="container">
+<div class="container mt-2">
     <div id="slider" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
         <!-- Indicators -->

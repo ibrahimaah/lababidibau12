@@ -8,23 +8,23 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('admin.about.services.index', [
-            'services' => Service::all()
-        ]);
-    }
+    // /**
+    //  * Display a listing of the resource.
+    //  */
+    // public function index()
+    // {
+    //     return view('admin.about.services.index', [
+    //         'services' => Service::all()
+    //     ]);
+    // }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -46,29 +46,6 @@ class ServiceController extends Controller
         return back()->with('faild','Service added faild :('); 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

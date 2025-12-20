@@ -30,16 +30,16 @@
             </li>
 
             <li>
-              <a class="dropdown-item" href="{{ route('edit-admin-about') }}">
+              <a class="dropdown-item" href="{{ route('admin-about') }}">
                 About
               </a>
             </li>
 
-            <li>
+            {{-- <li>
               <a class="dropdown-item" href="{{ route('admin-about-services') }}">
                 About Us - Services
               </a>
-            </li>
+            </li> --}}
 
             <li>
               <a class="dropdown-item" href="{{ route('admin-counter') }}">

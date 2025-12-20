@@ -17,6 +17,7 @@ use App\Http\Controllers\PortfolioVideoController;
 use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\ImprintController;
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\CounterController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ImageController;
@@ -52,13 +53,6 @@ Route::get('/job', [JobController::class, 'index'])->name('job');
 Route::middleware([Cookie::class])->group(function () {
     Route::get('admin', [SliderController::class, 'index']);
 
-    Route::get('admin/home/category', [CategoryController::class, 'index'])->name('admin-category');
-    Route::get('admin/category/create', [CategoryController::class, 'create'])->name('create-category');
-    Route::get('admin/category/edit/{id}', [CategoryController::class, 'edit'])->name('edit-category');
-    Route::post('admin/category/store', [CategoryController::class, 'store'])->name('store-category');
-    Route::post('admin/category/update/{id}', [CategoryController::class, 'update'])->name('update-category');
-    Route::post('admin/category/remove/{id}', [CategoryController::class, 'destroy'])->name('remove-category');
-
     Route::get('/admin/image', [ImageController::class, 'index'])->name('admin-image');
     Route::post('/image/store', [ImageController::class, 'store'])->name('store-image');
     Route::post('/image/remove/{id}', [ImageController::class, 'destroy'])->name('remove-image');
@@ -80,46 +74,45 @@ Route::middleware([Cookie::class])->group(function () {
     Route::delete('admin/hero-image', [HeroImageController::class, 'destroy'])->name('admin.hero-image.destroy');
    
     //
-    /////////////////// -- About page in Admin -- //////////////////////////
+    /////////////////// -- About page in dashboard -- //////////////////////////
 
     /////-- About Section --/////
-    Route::get(
-        '/admin/about/edit',
-        [AboutController::class, 'edit']
-    )->name('edit-admin-about');
-
-    Route::post(
-        '/about/update/{id}',
-        [AboutController::class, 'update']
-    )->name('update-admin-about');
-
-
-
-    /////-- Services Section --/////
-    Route::get(
-        '/admin/about/services',
-        [ServiceController::class, 'index']
-    )->name('admin-about-services');
-
-    Route::post(
-        '/admin/about/services/store',
-        [ServiceController::class, 'store']
-    )->name('store-admin-about-service');
-
-    Route::post(
-        '/admin/about/services/destroy/{id}',
-        [ServiceController::class, 'destroy']
-    )->name('remove-admin-about-service');
-
-
-    ////////////////////-- Counter page in admin  --///////////////////////////////
-    Route::get('/admin/counter', 'App\Http\Controllers\CounterController@index')->name('admin-counter');
-    Route::post('/counter/update', 'App\Http\Controllers\CounterController@update')->name('update-counter');
+    Route::get('/admin/about',[AboutController::class, 'index'])->name('admin-about');
+    Route::post('/about/update/{id}',[AboutController::class, 'update'])->name('update-admin-about');
+    Route::post('/admin/toggle-about', [AboutController::class, 'toggleAbout'])->name('toggle-about');
+    Route::post('/admin/about/services/store', [ServiceController::class, 'store'])->name('store-admin-about-service');
+    Route::post('/admin/about/services/destroy/{id}', [ServiceController::class, 'destroy'])->name('remove-admin-about-service');
+    
+    ////////////////////-- Counter page in dashboard  --///////////////////////////////
+    Route::get('/admin/counter', [CounterController::class,'index'])->name('admin-counter');
+    Route::post('/counter/update', [CounterController::class,'update'])->name('update-counter');
+    Route::post('/admin/toggle-counters', [CounterController::class, 'toggleCounters'])->name('toggle-counters');
     ////////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////-- Categories page in dashboard  --///////////////////////////////
+    Route::get('admin/home/category', [CategoryController::class, 'index'])->name('admin-category');
+    Route::get('admin/category/create', [CategoryController::class, 'create'])->name('create-category');
+    Route::get('admin/category/edit/{id}', [CategoryController::class, 'edit'])->name('edit-category');
+    Route::post('admin/category/store', [CategoryController::class, 'store'])->name('store-category');
+    Route::put('admin/category/update/{id}', [CategoryController::class, 'update'])->name('update-category');
+    Route::post('admin/category/remove/{id}', [CategoryController::class, 'destroy'])->name('remove-category');
+    Route::post('/admin/toggle-categories', [CategoryController::class, 'toggleCategories'])->name('toggle-categories');
+    ////////////////////////////////////////////////////////////////////////////////
+
+    /////-- Services Section --/////
+    // Route::get(
+    //     '/admin/about/services',
+    //     [ServiceController::class, 'index']
+    // )->name('admin-about-services');
+
+    
 
 
-    ////////////////////-- Social Media Links page in admin  --///////////////////////////////
+    
+
+
+
+    ////////////////////-- Social Media Links page in dashboard  --///////////////////////////////
     Route::get(
         '/admin/social-media-links',
         [SocialMediaLinkController::class, 'index']
@@ -167,7 +160,7 @@ Route::middleware([Cookie::class])->group(function () {
 
 
 
-    ////////////////////-- Map page in admin  --///////////////////////////////
+    ////////////////////-- Map page in dashboard  --///////////////////////////////
     //It does not work 
     // Route::get('/admin/map','MapController@index')->name('admin-map');
     // Route::post('/map/update','MapController@update')->name('update-map');
