@@ -51,12 +51,7 @@
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0">
                         <i class="fas fa-upload me-2"></i>Upload New Image
-                    </h5>
-                    @if(!($slider_status ?? false))
-                    <span class="badge bg-warning text-dark">
-                        <i class="fas fa-exclamation-triangle me-1"></i>Slider is OFF
-                    </span>
-                    @endif
+                    </h5> 
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -114,20 +109,7 @@
                 <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0">
                         <i class="fas fa-images me-2"></i>Existing Images
-                    </h5>
-                    <div class="d-flex align-items-center">
-                        <div class="me-3">
-                            <span class="badge {{ ($slider_status ?? false) ? 'bg-success' : 'bg-secondary' }}">
-                                <i class="fas {{ ($slider_status ?? false) ? 'fa-eye' : 'fa-eye-slash' }} me-1"></i>
-                                {{ ($slider_status ?? false) ? 'Visible' : 'Hidden' }}
-                            </span>
-                        </div>
-                        @if($sliders->count() > 0 && !($slider_status ?? false))
-                        <span class="badge bg-warning text-dark">
-                            <i class="fas fa-info-circle me-1"></i>Uploaded but hidden
-                        </span>
-                        @endif
-                    </div>
+                    </h5> 
                 </div>
                 <div class="card-body">
                     @isset($sliders)

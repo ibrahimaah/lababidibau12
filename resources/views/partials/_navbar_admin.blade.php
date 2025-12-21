@@ -54,6 +54,12 @@
             </li>
 
             <li>
+              <a class="dropdown-item" href="{{ route('admin.map.index') }}"> 
+                  Google Maps
+              </a>
+            </li>
+
+            <li>
               <a class="dropdown-item" href="{{ route('admin-contact') }}">
                 Contact
               </a>

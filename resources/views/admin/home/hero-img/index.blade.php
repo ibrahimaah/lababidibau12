@@ -18,16 +18,7 @@
                         $heroEnabled = PageFeatureEnum::HOME_HERO_IMG->is_enabled();
                     @endphp
                     
-                    @if($heroMedia)
-                    <div class="badge {{ $heroEnabled ? 'bg-success' : 'bg-secondary' }} fs-6">
-                        <i class="fas {{ $heroEnabled ? 'fa-eye' : 'fa-eye-slash' }} me-1"></i>
-                        {{ $heroEnabled ? 'Visible' : 'Hidden' }}
-                    </div>
-                    @else
-                    <div class="badge bg-warning fs-6">
-                        <i class="fas fa-exclamation-circle me-1"></i>No Image
-                    </div>
-                    @endif
+                  
                     
                     <!-- Hero Image Toggle -->
                     <div class="d-flex align-items-center">

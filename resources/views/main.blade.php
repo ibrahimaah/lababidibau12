@@ -150,16 +150,16 @@
     @include('partials.main-page._services')  
     <!-- End Categories Sevices Section -->
     
-    <!-- ======= Contact Section ======= -->
-    <div class="container px-0 mb-4">
+    <!-- ======= Google Map Section ======= -->
+    @include('partials.main-page._map')  
+    <!-- EndGoogle Map Section -->
 
-        {{-- <iframe style="border:0; width: 100%; height: 270px;"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.6109694272823!2d7.047321315162549!3d50.63434338197923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bee2b513b9f14d%3A0x18de3272a28c82b9!2sZypressenweg%203%2C%2053340%20Meckenheim%2C%20Germany!5e0!3m2!1sen!2sus!4v1615403481751!5m2!1sen!2sus" frameborder="0" allowfullscreen></iframe> --}}
+    <!-- ======= Contact Section ======= -->
+    {{-- <div class="container px-0 mb-4">
         <iframe style="border:0; width: 100%; height: 270px;"
               src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2000.50685128268!2d6.956550975592145!3d50.62490387478869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDM3JzI5LjYiTiA2wrA1NyczMi45IkU!5e1!3m2!1sen!2s!4v1765740969123!5m2!1sen!2s" 
               frameborder="0" allowfullscreen></iframe>
-    
-    </div>
+    </div> --}}
 
     <section id="Kontakt" class="container contact bg-primary pt-5 pb-3">
       <div class="container" data-aos="fade-up">

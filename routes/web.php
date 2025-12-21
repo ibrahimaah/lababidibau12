@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\HeroImageController;
+use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ImageController;
 use App\Http\Middleware\Cookie;
 use App\Http\Controllers\VideoController;
+use App\Models\MapSetting;
 
 // use App\Models\SocialMediaLink;
 
@@ -98,19 +100,10 @@ Route::middleware([Cookie::class])->group(function () {
     Route::post('admin/category/remove/{id}', [CategoryController::class, 'destroy'])->name('remove-category');
     Route::post('/admin/toggle-categories', [CategoryController::class, 'toggleCategories'])->name('toggle-categories');
     ////////////////////////////////////////////////////////////////////////////////
-
-    /////-- Services Section --/////
-    // Route::get(
-    //     '/admin/about/services',
-    //     [ServiceController::class, 'index']
-    // )->name('admin-about-services');
-
-    
-
-
-    
-
-
+    Route::get('admin/home/google-map', [MapController::class, 'index'])->name('admin.map.index');
+    Route::put('/map/{mapSetting}', [MapController::class, 'update'])->name('admin.map.update');
+    Route::post('/map/{mapSetting}/toggle', [MapController::class, 'toggle'])->name('admin.map.toggle');
+ 
 
     ////////////////////-- Social Media Links page in dashboard  --///////////////////////////////
     Route::get(
