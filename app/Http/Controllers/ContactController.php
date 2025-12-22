@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PageFeatureEnum;
 use App\Models\Contact;
+use App\Models\WorkingHour;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -11,12 +13,7 @@ class ContactController extends Controller
     //return contact form and contact info on user page
     public function index()
     {
-        $contacts = Contact::find(1);
-        if($contacts)
-        {
-            return view('contact')->withContacts($contacts);
-        }
-        return view('contact');
+        return view('contact', ['contacts' => Contact::first()]); 
     }
 
 
@@ -69,12 +66,13 @@ class ContactController extends Controller
     //return user info and a form to update user info on admin page
     public function index_admin()
     {
-        $contacts = Contact::find(1);
-        if($contacts)
-        {
-            return view('contact-admin')->withContacts($contacts);
-        }
-        return view('contact-admin');
+        $workingHours = WorkingHour::first();
+
+        return view('contact-admin', [
+            'contacts' => Contact::first(),
+            'workingHoursData' => $workingHours?->hours ?? [], // ✅ already array
+            'isOpenNow' => $workingHours?->openingHours()->isOpenAt(now()) ?? false,
+        ]);
     }
     
     public function update(Request $request)
@@ -98,5 +96,17 @@ class ContactController extends Controller
         {
             return back()->with('faild','Cann\'t update Contacts Info :(');
         }
+    }
+
+    public function toggleContact(Request $request)
+    {
+        $enabled = $request->boolean('contact_status');
+    
+        PageFeatureEnum::HOME_CONTACT->set($enabled);
+    
+        return back()->with(
+            'contact_toggle_status',
+            $enabled ? 'enabled' : 'disabled'
+        );
     }
 }

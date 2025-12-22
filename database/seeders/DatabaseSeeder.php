@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PageFeatureSeeder::class,
         ]);
+        $this->call(WorkingHoursSeeder::class);
+
     }
 }

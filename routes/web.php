@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
+use App\Http\Controllers\Admin\WorkingHoursController;
 use App\Http\Controllers\PortfolioImageController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\CategoryController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\PortfolioVideoController;
 use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\ImprintController;
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CounterController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MainController;
@@ -103,7 +105,12 @@ Route::middleware([Cookie::class])->group(function () {
     Route::get('admin/home/google-map', [MapController::class, 'index'])->name('admin.map.index');
     Route::put('/map/{mapSetting}', [MapController::class, 'update'])->name('admin.map.update');
     Route::post('/map/{mapSetting}/toggle', [MapController::class, 'toggle'])->name('admin.map.toggle');
- 
+    ////////////////////////////////////////////////////////////////////////////////
+    Route::get('/admin/contact', 'App\Http\Controllers\ContactController@index_admin')->name('admin-contact');
+    Route::post('/contact/update', 'App\Http\Controllers\ContactController@update')->name('update-contact');
+    Route::post('/admin/working-hours', [WorkingHoursController::class, 'update'])
+    ->name('admin.working-hours.update');
+    Route::post('/admin/toggle-contact', [ContactController::class, 'toggleContact'])->name('toggle-contact');
 
     ////////////////////-- Social Media Links page in dashboard  --///////////////////////////////
     Route::get(
@@ -162,8 +169,8 @@ Route::middleware([Cookie::class])->group(function () {
     //Route::post('/image-upload-handler','ImageController@store');
 
     //Route::get('/contact','ContactController@index')->name('contact');
-    Route::get('/admin/contact', 'App\Http\Controllers\ContactController@index_admin')->name('admin-contact');
-    Route::post('/contact/update', 'App\Http\Controllers\ContactController@update')->name('update-contact');
+
+
     ////////////////////////////////////////////////////////////////////////////////
     Route::get('/admin/password', 'App\Http\Controllers\UserController@index')->name('admin-password');
     Route::post('/password/update', 'App\Http\Controllers\UserController@update')->name('update-password');

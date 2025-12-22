@@ -12,7 +12,7 @@ enum PageFeatureEnum: string
     case HOME_SLIDER = 'page-home-slider';
     case HOME_ABOUT = 'page-home-about';
     case HOME_CATEGORIES = 'page-home-categories';
-    case HOME_COUNTERS = 'page-home-counters';
+    case HOME_COUNTERS = 'page-home-counters'; 
     case SERVICES = 'page-services';
     case VIDEO_GALLERY = 'page-video-gallery';
 

@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Models\About;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\HeroImage;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\SocialMediaLink;
+use App\Models\WorkingHour;
 use App\View\Composers\ProfileComposer;
 use Illuminate\Support\Facades;
 use Illuminate\Support\ServiceProvider;
@@ -38,6 +40,8 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('sliders', Slider::with('media')->get());
         });
 
+        
+
         // Get the hero image from database
         $heroImage = HeroImage::first();
         // Check if hero image exists and has media
@@ -52,6 +56,12 @@ class ViewServiceProvider extends ServiceProvider
 
         Facades\View::composer('partials.main-page._about', function (View $view) {
             $view->with('about_us', About::first())->with('services', Service::all());
+        });
+
+        Facades\View::composer('partials.main-page._contact', function (View $view) 
+        {
+            $workingHours = WorkingHour::first();
+            $view->with('contacts', Contact::first())->with('workingHours',$workingHours)->with('openingHours',$workingHours?->openingHours()); 
         });
     }
 }
