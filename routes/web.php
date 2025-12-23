@@ -59,7 +59,7 @@ Route::middleware([Cookie::class])->group(function () {
 
     Route::get('/admin/image', [ImageController::class, 'index'])->name('admin-image');
     Route::post('/image/store', [ImageController::class, 'store'])->name('store-image');
-    Route::post('/image/remove/{id}', [ImageController::class, 'destroy'])->name('remove-image');
+    Route::delete('/image/remove/{id}', [ImageController::class, 'destroy'])->name('remove-image');
 
     Route::get('/admin/video', [VideoController::class, 'index'])->name('admin-video');
     Route::post('/video/store', [VideoController::class, 'store'])->name('store-video');

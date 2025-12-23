@@ -36,7 +36,7 @@ class PortfolioImageController extends Controller
 
     public function getCategoryById($category_id)
     {
-        $categories = $this->portfolioImageService->getAllCategories();
+        $categories = Category::all();
 
         $current_category = $categories->where('id', $category_id)->first();
 

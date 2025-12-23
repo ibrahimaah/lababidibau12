@@ -2,82 +2,16 @@
 
 
 @section('content')
-
-
+ 
   
-@isset($social)
+{{-- @isset($social)
   @include('partials._header',['social',$social])
 @else
   @include('partials._header')
-@endisset
+@endisset --}}
  
 	
-  <style>
-   
-
-     
-      @media only screen and (min-width: 768px) 
-      {
-        /* img.vbox-figlio
-        {
-          object-fit: contain;
-          width: auto;
-          height: 600px;
-        } */
-      }
-      @media only screen and (max-width: 767px) 
-      {
-        /* img.vbox-figlio
-        {
-          object-fit: cover;
-          width: auto;
-          height: 700px;
-        } */
-      }
-
-      
-      img.vbox-figlio
-        {
-          object-fit: contain;
-          width: 100%;
-          height: 600px;
-        }
-      /* .img-show{
-          object-fit: contain;
-          width: 100%;
-          height: 300px;
-      } */
-      /* a.vbox-next,a.vbox-prev{
-        display: none !important;
-      } */
-     
-
-
-       /* Customizing the pagination view */
-
-     .page-link{
-        color: rgba(var(--bs-secondary-rgb),var(--bs-text-opacity))!important;
-    }
-    
-    .page-item.active .page-link {
-      background-color:var(--second-color) !important;
-      color:#fff !important;
-      border: none;
-    } 
-    #portfolio > div > nav > ul > li.page-item.active > span {
-      border: none !important;
-    }
-    /*
-    .active>.page-link, .page-link.active {
-      border-color: var(--second-color) !important;
-    } */
-    
-    #portfolio > div > div.row.d-flex.justify-content-center.mb-4 > div > ul > li > a.active{
-      color: #fff !important;
-      background-color: var(--second-color) !important;
-    }
-  </style>
-
+<link rel="stylesheet" href="{{ asset('assets/css/portfolio-image-category-styles.css') }}">
 
 	<section id="portfolio" class="portfolio py-5" >
     <div class="container" data-aos="fade-up">
@@ -110,7 +44,7 @@
           <div class="col-md-4 portfolio-item">
             <div class="portfolio-wrap">
 
-              <img src="{{ asset('storage/images/'.$image->name) }}" class="img-fluid">
+              <img src="{{ $image->getFirstMediaUrl('images') }}" class="img-fluid">
 
               <div class="portfolio-info w-100 h-100">
                 
@@ -118,7 +52,7 @@
                 
                 <div class="portfolio-links w-100 h-100">
                   <a 
-                    href="{{ asset('storage/images/'.$image->name) }}" 
+                    href="{{ $image->getFirstMediaUrl('images') }}" 
                     data-gall="portfolioGallery" 
                     class="venobox" 
                     title="<?=$current_category->name?>"

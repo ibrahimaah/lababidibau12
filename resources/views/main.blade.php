@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('meta_keywords', 'Dekor Von Decken Und Wänden,Trockenbau,Bodensysteme,3D Paneele für Wand und Decke,Laminat,Garten')
 
 @section('content')
@@ -11,8 +12,7 @@
   @include('partials._header')
 @endisset --}}
 
-@include('partials._navbar')
-
+{{-- @include('partials._navbar') --}}
 
   <!-- End Header -->
 
@@ -128,13 +128,9 @@
        }*/
   </style>
 
-
-
-
   @include('partials.main-page._hero_img')
 
   @include('partials.main-page._slider')
-
 
   <main id="main">
 
@@ -155,16 +151,7 @@
     <!-- EndGoogle Map Section -->
 
     <!-- ======= Contact Section ======= -->
-    {{-- <div class="container px-0 mb-4">
-        <iframe style="border:0; width: 100%; height: 270px;"
-              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2000.50685128268!2d6.956550975592145!3d50.62490387478869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDM3JzI5LjYiTiA2wrA1NyczMi45IkU!5e1!3m2!1sen!2s!4v1765740969123!5m2!1sen!2s" 
-              frameborder="0" allowfullscreen></iframe>
-    </div> --}}
-
     @include('partials.main-page._contact')  
-   
-
-    
     <!-- End Contact Section -->
  
   </main>
