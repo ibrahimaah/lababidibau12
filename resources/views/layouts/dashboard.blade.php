@@ -26,10 +26,12 @@
 
     <title>@yield('title','LABABIDI BAU')</title>
 
+    @stack('styles')
 </head>
 
 <body>
 
+    @include('partials._navbar_admin')
 
     @yield('content')
 
@@ -70,6 +72,8 @@
             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
         });
     </script>
+
+    @stack('scripts')
 </body>
 
 </html>

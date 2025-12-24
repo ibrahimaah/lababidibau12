@@ -63,7 +63,7 @@ Route::middleware([Cookie::class])->group(function () {
 
     Route::get('/admin/video', [VideoController::class, 'index'])->name('admin-video');
     Route::post('/video/store', [VideoController::class, 'store'])->name('store-video');
-    Route::post('/video/remove/{id}', [VideoController::class, 'destroy'])->name('remove-video');
+    Route::delete('/video/remove/{video}', [VideoController::class, 'destroy'])->name('remove-video');
 
     Route::get('/admin/slider', [SliderController::class, 'index'])->name('admin-slider');
     Route::post('/admin/toggle-slider', [SliderController::class, 'toggleSlider'])->name('toggle-slider');

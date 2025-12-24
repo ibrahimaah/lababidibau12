@@ -32,6 +32,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/override-bs.css') }}">
 
+    @stack('styles')
+    
     <title>@yield('title','Reinster')</title>
 
 </head>

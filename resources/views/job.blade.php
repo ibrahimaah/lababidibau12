@@ -19,11 +19,11 @@
 
 </style>
 
-@isset($social)
+{{-- @isset($social)
   @include('partials._header',['social',$social])
 @else
   @include('partials._header')
-@endisset
+@endisset --}}
 
     <section class="py-5">
         <div class="container">

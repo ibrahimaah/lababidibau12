@@ -1,95 +1,251 @@
-@extends('admin')
+@extends('layouts.dashboard')
 
+@section('title','Videos')
 
-@section('admin-content')
+@section('content')
+<div class="container py-4">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">
+            <i class="fas fa-video me-2 text-primary"></i>Video Management
+        </h1>
+        <span class="badge bg-primary rounded-pill fs-6">
+            {{ $videos->count() }} Videos
+        </span>
+    </div>
 
-
-<h2 class="text-center mt-4">Videos</h2>
-<hr class="my-4">
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
+    <!-- Flash Messages -->
+    <div class="mb-4">
+        @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h5 class="alert-heading">
+                <i class="fas fa-exclamation-circle me-2"></i>Validation Errors
+            </h5>
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+            <i class="fas fa-check-circle me-2 fs-5"></i>
+            <div>{{ Session::get('success') }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if(Session::has('faild'))
+        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+            <i class="fas fa-exclamation-triangle me-2 fs-5"></i>
+            <div>{{ Session::get('faild') }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if(Session::has('success-removed'))
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+            <i class="fas fa-trash-alt me-2 fs-5"></i>
+            <div>{{ Session::get('success-removed') }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if(Session::has('faild-removed'))
+        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+            <i class="fas fa-times-circle me-2 fs-5"></i>
+            <div>{{ Session::get('faild-removed') }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
     </div>
-@endif
 
+    <div class="row g-4">
+        <!-- Upload Form Card -->
+        <div class="col-lg-4 col-md-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0">
+                        <i class="fas fa-upload me-2"></i>Upload New Video
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" action="{{ route('store-video') }}">
+                        @csrf
 
-@if(Session::has('success'))
-    <h4 class="text-success">{{ session()->get('success') }}</h4>
-@else
-    <h4 class="text-danger">{{ session()->get('faild') }}</h4>
-@endif
+                        <!-- Video Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label fw-semibold">
+                                <i class="fas fa-heading me-1 text-primary"></i>Video Title
+                            </label>
+                            <input type="text" name="title" id="title" class="form-control form-control-lg"
+                                placeholder="Enter video title" required>
+                        </div>
 
-@if(Session::has('success-removed'))
-    <h4 class="text-success">{{ session()->get('success-removed') }}</h4>
-@endif
+                        <!-- Thumbnail Upload -->
+                        <div class="mb-4">
+                            <label for="thumb" class="form-label fw-semibold">
+                                <i class="fas fa-image me-1 text-primary"></i>Thumbnail Image
+                            </label>
+                            <div class="input-group">
+                                <input type="file" name="thumb" id="thumb" class="form-control" accept="image/*"
+                                    required>
+                            </div>
+                            <small class="form-text text-muted">
+                                Recommended: 1280x720px (16:9 ratio)
+                            </small>
+                        </div>
 
-@if(Session::has('faild-removed'))
-    <h4 class="text-danger">{{ session()->get('faild-removed') }}</h4>
-@endif
+                        <!-- Video File Upload -->
+                        <div class="mb-4">
+                            <label for="video" class="form-label fw-semibold">
+                                <i class="fas fa-file-video me-1 text-primary"></i>Video File
+                            </label>
+                            <div class="input-group">
+                                <input type="file" name="name" id="video" class="form-control" accept="video/*"
+                                    required>
+                            </div>
+                            <small class="form-text text-muted">
+                                Maximum size: 100MB. Supported: MP4, MOV, AVI
+                            </small>
+                        </div>
 
-<div class="row">
-    <div class="col-sm-12 col-md-4">
-        <form method="post" enctype="multipart/form-data" action="{{ route('store-video') }}" style="padding-top:40px">
-            @csrf 
-            <div class="form-group">
-                <label>Choose a thumnnail</label>
-                <input type="file" name="thumb" class="form-control-file" accept="image/*" required>
-            </div>
-            <div class="form-group">
-                <label>Video Title</label>
-                <input type="text" name="title" class="form-control" placeholder="Enter Video Title" required>
-            </div>
-            <div class="form-group">
-                <label>Choose a video</label>
-                <input type="file" name="name" class="form-control-file" accept="video/*" required>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success col-md-3">Save</button>
-            </div>
-        </form>
-    </div>
-    <div class="col-sm-12 col-md-8">
-        
-        <div class="row">
-            @foreach($videos as $video)
-            <div class="card-deck col-md-6 mb-4">
-                <div class="card">
-
-                    <a data-fancybox href="#myVideo{{ $video->id }}">
-                        <img class="card-img-top img-fluid" src="{{ asset('storage/videos/thumbnails/'.$video->thumb) }}"  style="height:200px"/>
-                    </a>
-
-                    <div class="card-body">
-                        <p class="card-text">{{ $video->title }}</p>
-                    </div>
-
-                    <video width="800" height="500" controls id="myVideo{{ $video->id }}" style="display:none;">
-                        <source src="{{ asset('storage/videos/'.$video->name) }}" type="video/mp4">
-                        Your browser doesn't support HTML5 video tag.
-                    </video>
-
-                    <div>
-                        <form class="text-center pb-2" action="{{ route('remove-video', $video->id) }}" method="POST">
-                            @csrf
-                            <input type="submit" value="Remove" class="btn btn-sm btn-danger">
-                        </form>
-                    </div>
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-cloud-upload-alt me-2"></i>Upload Video
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            @endforeach
         </div>
 
+        <!-- Videos Grid -->
+        <div class="col-lg-8 col-md-12">
+            @if($videos->count() > 0)
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                @foreach($videos as $video)
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <!-- Video Thumbnail with Play Button -->
+                        <div class="position-relative overflow-hidden rounded-top"
+                            style="height: 180px; background: #f8f9fa;">
+                            @if($video->hasMedia('thumbnails'))
+                            <img src="{{ $video->getFirstMediaUrl('thumbnails') }}"
+                                class="card-img-top h-100 w-100 object-fit-cover" alt="{{ $video->title }}">
+                            @else
+                            <div class="d-flex align-items-center justify-content-center h-100 bg-light">
+                                <i class="fas fa-image fa-3x text-secondary"></i>
+                            </div>
+                            @endif
+                            <div class="position-absolute top-50 start-50 translate-middle">
+                                {{-- Fixed version --}}
+                                @if($video->hasMedia('videos'))
+                                <a data-fancybox href="{{ $video->getFirstMediaUrl('videos') }}"
+                                    data-caption="{{ $video->title }}"
+                                    class="btn btn-primary btn-lg rounded-circle shadow"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fas fa-play"></i>
+                                </a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <h6 class="card-title text-truncate mb-2" title="{{ $video->title }}">
+                                {{ $video->title }}
+                            </h6>
+
+                            <!-- Video Info -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>
+                                    {{ $video->created_at->format('M d, Y') }}
+                                </small>
+                                @if($video->hasMedia('videos'))
+                                <span class="badge bg-info">
+                                    <i class="fas fa-hdd me-1"></i>
+                                    {{ round($video->getFirstMedia('videos')->size / 1024 / 1024, 1) }}MB
+                                </span>
+                                @endif
+                            </div>
+
+                            <!-- Hidden Video Player -->
+                            @if($video->hasMedia('videos'))
+                            <video id="videoPlayer{{ $video->id }}" controls style="display: none;"
+                                poster="{{ $video->hasMedia('thumbnails') ? $video->getFirstMediaUrl('thumbnails') : '' }}">
+                                <source src="{{ $video->getFirstMediaUrl('videos') }}"
+                                    type="{{ $video->getFirstMedia('videos')->mime_type }}">
+                                Your browser doesn't support HTML5 video.
+                            </video>
+                            @endif
+                        </div>
+
+                        <!-- Card Footer with Delete Form -->
+                        <div class="card-footer bg-transparent border-top-0 pt-0">
+                            <form action="{{ route('remove-video', $video->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this video?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                    <i class="fas fa-trash-alt me-2"></i>Delete Video
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <!-- Empty State -->
+            <div class="text-center py-5">
+                <div class="mb-4">
+                    <i class="fas fa-video-slash fa-4x text-muted"></i>
+                </div>
+                <h4 class="text-muted mb-3">No Videos Uploaded Yet</h4>
+                <p class="text-muted mb-4">Upload your first video using the form on the left</p>
+            </div>
+            @endif
+
+            <!-- Pagination (if needed) -->
+            @if($videos->hasPages())
+            <div class="mt-4">
+                {{ $videos->links('pagination::bootstrap-5') }}
+            </div>
+            @endif
+        </div>
     </div>
 </div>
-<hr class="my-4">
-<p class="invisible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto sit accusamus esse in quasi tempora molestias aperiam nam ex temporibus exercitationem assumenda velit deserunt maxime molestiae placeat quae, sed dicta.</p>
+
+<!-- Fancybox CSS (if not already included) -->
+@push('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+@endpush
+
+<!-- Fancybox JS -->
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<script>
+    // Initialize Fancybox
+    Fancybox.bind("[data-fancybox]", {
+        // Options can be added here
+    });
+    
+    // Auto-dismiss alerts after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+    });
+</script>
+@endpush
 @endsection
-
-
-
-  

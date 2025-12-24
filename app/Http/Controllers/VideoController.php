@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class VideoController extends Controller
 {
@@ -13,20 +13,11 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        $videos = Video::all();
-        return view('video')->withVideos($videos);
-    }
+        $videos = Video::with('media')->latest()->paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('video', compact('videos'));
     }
 
     /**
@@ -37,72 +28,40 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(11111111);
         $request->validate([
-            'thumb' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg',
-            'title' => 'required',
-            'name' => 'required'
+            'thumb' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'title' => 'required|string|max:255',
+            'name' => 'required|file|mimes:mp4,mov,avi,wmv,mkv|max:102400' // 100MB max
         ]);
-        //dd(111111111111);
-        $mime = $request->name->getMimeType();
 
-        if ($mime == "video/x-flv" || $mime == "video/mp4" || $mime == "application/x-mpegURL" || $mime == "video/MP2T" || $mime == "video/3gpp" || $mime == "video/quicktime" || $mime == "video/x-msvideo" || $mime == "video/x-ms-wmv") 
-        {
+        try {
+            // Create video record
+            $video = Video::create([
+                'title' => $request->title,
+            ]);
 
-            $video = new Video();
+            // Add thumbnail to media library
+            if ($request->hasFile('thumb')) {
+                $video->addMediaFromRequest('thumb')
+                    ->toMediaCollection('thumbnails');
+            }
 
-            $thumbName = $video->thumb.'_image'.time().'.'.$request->thumb->getClientOriginalExtension();
-            $request->thumb->move(public_path('storage/videos/thumbnails'), $thumbName);
+            // Add video to media library
+            if ($request->hasFile('name')) {
+                $video->addMediaFromRequest('name')
+                    ->toMediaCollection('videos');
+            }
 
-            $videoName = $video->name.'_video'.time().'.'.$request->name->getClientOriginalExtension();
-            $request->name->move(public_path('storage/videos'), $videoName);
+            return back()->with('success', 'Video uploaded successfully!');
 
-            $video->thumb = $thumbName;
-            $video->name = $videoName;
-            $video->title = $request->title;
-            
-            if($video->save())
-            {
-               return back()->with('success','Video added successfully :)'); 
+        } catch (\Exception $e) {
+            // If something fails, delete the video record if it was created
+            if (isset($video) && $video->exists) {
+                $video->delete();
             }
             
-            return back()->with('faild','Image added faild :('); 
+            return back()->with('faild', 'Failed to upload video: ' . $e->getMessage());
         }
-    
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -113,17 +72,20 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        $video = Video::findOrFail($id);
-        if(file_exists(public_path("storage/videos/$video->name")))
-        {
-            if(file_exists(public_path("storage/videos/thumbnails/$video->thumb")))
-            {
-                unlink(public_path("storage/videos/$video->name"));
-                unlink(public_path("storage/videos/thumbnails/$video->thumb"));
-                $video->delete();
-                return back()->with('success-removed','Video Removed Successfully :)');
-            }
-        } 
-        return back()->with('faild-removed','Video Can\'t be removed :(');
+        try {
+            $video = Video::findOrFail($id);
+            
+            // Delete all media associated with the video
+            $video->clearMediaCollection('thumbnails');
+            $video->clearMediaCollection('videos');
+            
+            // Delete the video record
+            $video->delete();
+
+            return back()->with('success-removed', 'Video deleted successfully!');
+
+        } catch (\Exception $e) {
+            return back()->with('faild-removed', 'Failed to delete video: ' . $e->getMessage());
+        }
     }
 }
