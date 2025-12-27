@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\HeroImage;
 use App\Models\Service;
+use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\SocialMediaLink;
 use App\Models\WorkingHour;
@@ -30,6 +31,12 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+       
+        Facades\View::composer('partials._navbar', function (View $view) {
+            $logoSetting = Setting::where('key', 'logo')->first();
+            $view->with('logoSetting',   $logoSetting);
+        });
+
         // Using closure based composers...
         Facades\View::composer('partials._header', function (View $view) {
             $view->with('social_media', SocialMediaLink::all())->with('categories', Category::all());

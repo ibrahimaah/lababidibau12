@@ -50,11 +50,14 @@ Route::get('/Videogalerie', [PortfolioVideoController::class, 'index'])->name('p
 Route::get('/datenschutz', [PrivacyController::class, 'index'])->name('privacy_policy');
 Route::get('/impressum', [ImprintController::class, 'index'])->name('imprint');
 Route::get('/advertisement', [AdvertisementController::class, 'index'])->name('advertisement');
-Route::get('/job', [JobController::class, 'index'])->name('job');
+Route::get('/job', [JobController::class, 'indesettingsx'])->name('job');
 //Route::get('/advertisement', function(){ return 'You Can Not Access This Page'; });
 
 /////////////////////////////////////////////////////////////////////////////////////////
 Route::middleware([Cookie::class])->group(function () {
+    Route::get('dashboard', function(){
+        return '';
+    })->name('admin.dashboard');
     Route::get('admin', [SliderController::class, 'index']);
 
     Route::get('/admin/image', [ImageController::class, 'index'])->name('admin-image');
@@ -224,7 +227,7 @@ Route::middleware([Cookie::class])->group(function () {
     // Settings Page
     Route::get('admin/settings', [SettingController::class, 'index'])->name('admin.settings.index');
     // Update Settings
-    Route::post('admin/settings', [SettingController::class, 'update'])->name('admin.settings.update');
+    Route::put('admin/settings', [SettingController::class, 'update'])->name('admin.settings.update');
 
     /////////////////////////////////////////////////////////////////
     //Route::get('/admin/whatsapp','UserController@index_whatsapp')->name('admin-whatsapp');

@@ -5,11 +5,13 @@
         <!-- Logo and Website Name with PNG Logo -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('main') }}">
             <!-- PNG Logo Image -->
-            <img src="{{ setting('logo') ? asset('storage/' . setting('logo')) : asset('assets/img/images/logo.jpg') }}" 
+            @if($logoSetting && $logoSetting->hasMedia('logo'))
+            <img src="{{ $logoSetting->getFirstMediaUrl('logo') }}" 
                  alt="Logo" 
                  width="60" 
                  height="60" 
                  class="d-inline-block align-text-top me-2">
+            @endif
             <span class="fw-bold">{{ setting('site_name', 'Lababidi Bau') }}</span>
         </a>
 
