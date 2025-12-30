@@ -57,5 +57,5 @@
     
     #portfolio > div > div.row.d-flex.justify-content-center.mb-4 > div > ul > li > a.active{
       color: #fff !important;
-      background-color: var(--bs-dark) !important;
+      background-color: var(--bs-primary) !important;
     }

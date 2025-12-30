@@ -14,9 +14,8 @@
 @include('partials._header')
 @endisset --}}
 
-<div class="top-img w-100">
-    <img src="{{ asset('assets/img/images/a.jpg') }}" alt="top image" class="w-100">
-</div>
+@include('partials.main-page._hero_img')
+
 <div class="container py-5">
     <div class="section-title">
         <h2 data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000"

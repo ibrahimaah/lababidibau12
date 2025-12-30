@@ -38,7 +38,7 @@ class SettingController extends Controller
             // colors
             'primary_color' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
             'secondary_color' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
-            'background_color' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            
 
             // media
             'logo' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg'],

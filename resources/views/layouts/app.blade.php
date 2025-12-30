@@ -16,7 +16,7 @@
     
     <style>
           :root {
-            --bs-primary: {{ setting('primary_color', '#6c757d') }};
+            --bs-primary: {{ setting('primary_color', '#cfe3ff') }};
             --bs-secondary: {{ setting('secondary_color', '#0d6efd') }};
             --bs-success: {{ setting('success_color', '#198754') }};
             --bs-danger: {{ setting('danger_color', '#dc3545') }};
@@ -25,9 +25,11 @@
             --bs-light: {{ setting('light_color', '#f8f9fa') }};
             --bs-dark: {{ setting('dark_color', '#212529') }};
             --bs-body-bg: {{ setting('background_color', '#ffffff') }};
-            --bs-body-color: {{ setting('text_color', '#212529') }};
+            --bs-body-color: {{ setting('text_color', '#212529') }}; 
         }
-
+        .text-grey{
+            color: #212529bf !important;
+        }
     </style>
 
     <link rel="stylesheet" href="{{ asset('assets/css/override-bs.css') }}">

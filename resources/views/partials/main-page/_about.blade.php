@@ -2,6 +2,7 @@
 
 @if(PageFeatureEnum::HOME_ABOUT->is_enabled())
 
+<section id="about" class="about">
 <section id="about" class="about section-bg">
     <div class="container" data-aos="fade-up">
 

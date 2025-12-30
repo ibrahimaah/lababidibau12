@@ -25,13 +25,13 @@
               <ul class="nav nav-pills nav-fill mb-3">
                 @foreach($categories as $category)
                 <li class="nav-item">
-                  <a class="nav-link fw-bold text-secondary <?=$category->id == $current_category->id ? 'active' : ''?>"
+                  <a class="nav-link fw-bold text-grey <?=$category->id == $current_category->id ? 'active' : ''?>"
                     href="{{ route('portfolio-image-category',['category_id'=>$category->id]) }}">{{ $category->name }}</a>
                 </li>
                 @endforeach
               </ul>
             @endif
-            <p class="text-secondary">{{ $current_category->description }}</p>
+            <p class="text-grey">{{ $current_category->description }}</p>
           </div>
         </div>
 

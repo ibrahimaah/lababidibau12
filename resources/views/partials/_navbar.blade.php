@@ -1,5 +1,5 @@
  <!-- Navbar -->
- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+ <nav class="navbar navbar-expand-lg bg-body-tertiary bg-secondary">
     <div class="container">
         <!-- Logo and Website Name -->
         <!-- Logo and Website Name with PNG Logo -->
@@ -12,7 +12,7 @@
                  height="60" 
                  class="d-inline-block align-text-top me-2">
             @endif
-            <span class="fw-bold">{{ setting('site_name', 'Lababidi Bau') }}</span>
+            <span class="fw-bold text-primary">{{ setting('site_name', 'Lababidi Bau') }}</span>
         </a>
 
         <!-- Mobile Toggle Button -->
@@ -37,7 +37,7 @@
                         {{-- <i class="bi bi-gear me-1"></i>  --}}
                         Leistungen
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu bg-secondary">
                         @if($categories->isNotEmpty())
                             @foreach($categories as $category)
                                 <li>

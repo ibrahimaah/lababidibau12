@@ -21,7 +21,7 @@
             <form action="{{ route('update-privacy') }}" method="POST">
             @csrf
 
-                <textarea name="privacy" rows="30">
+                <textarea class="textarea-tinymce" name="privacy" rows="30">
 
                 </textarea>
 

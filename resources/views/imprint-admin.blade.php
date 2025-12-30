@@ -21,7 +21,7 @@
             <form action="{{ route('update-imprint') }}" method="POST">
             @csrf
 
-                <textarea name="imprint" rows="30">
+                <textarea class="textarea-tinymce" name="imprint" rows="30">
 
                 </textarea>
 
