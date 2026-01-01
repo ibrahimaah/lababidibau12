@@ -15,6 +15,7 @@ enum PageFeatureEnum: string
     case HOME_COUNTERS = 'page-home-counters'; 
     case SERVICES = 'page-services';
     case VIDEO_GALLERY = 'page-video-gallery';
+    case JOBS = 'page-jobs';
 
     public function is_enabled(): bool
     {

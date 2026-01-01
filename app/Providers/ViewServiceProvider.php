@@ -31,7 +31,11 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       
+        Facades\View::composer('partials._footer', function (View $view) {
+            $logoSetting = Setting::where('key', 'logo_footer')->first();
+            $view->with('logoSetting',   $logoSetting);
+        });
+
         Facades\View::composer('partials._navbar', function (View $view) {
             $logoSetting = Setting::where('key', 'logo')->first();
             $view->with('logoSetting',   $logoSetting);

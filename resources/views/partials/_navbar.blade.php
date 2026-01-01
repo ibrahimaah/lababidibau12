@@ -1,3 +1,6 @@
+@use(App\Enums\PageFeatureEnum)
+
+
  <!-- Navbar -->
  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-secondary">
     <div class="container">
@@ -31,6 +34,7 @@
                     </a>
                 </li>
                    
+                @if(PageFeatureEnum::SERVICES->is_enabled())
                 <!-- Services Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -47,21 +51,27 @@
                         @endif
                     </ul>
                 </li>
+                @endif
 
                 
+                @if(PageFeatureEnum::VIDEO_GALLERY->is_enabled())
                 <!-- Portfolio Video Link -->
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('portfolio-video') ? 'active' : '' }}" href="{{ route('portfolio-video') }}">
                         Videogalerie
                     </a>
                 </li>
-               
+                @endif 
+
+
+                @if(PageFeatureEnum::HOME_CONTACT->is_enabled())
                 <!-- Contact Link -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('main') }}#Kontakt">
                         Kontakt
                     </a>
                 </li>
+                @endif
 
             </ul>
         </div>

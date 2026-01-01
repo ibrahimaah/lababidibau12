@@ -7,8 +7,7 @@
 </style>
 
 
-
-
+@use(App\Enums\PageFeatureEnum)
 <footer id="footer">
 
   <div class="footer-top">
@@ -28,39 +27,63 @@
 -->
         <div class="col-sm text-center">
           <h3><a href="{{ route('main') }}">{{ setting('site_name', 'Lababidi Bau') }}</a></h3>
-          <a href="{{ route('main') }}">
 
-            <img src="{{ setting('logo_footer') ? asset('storage/' . setting('logo_footer')) : asset('assets/img/images/logo.jpg') }}"
-              alt="" style="width:150px;height:150px">
-          </a>
+            @if($logoSetting && $logoSetting->hasMedia('logo_footer'))
+              <a href="{{ route('main') }}">
+                <img src="{{ $logoSetting->getFirstMediaUrl('logo_footer') }}"
+                    alt="" 
+                    style="width:150px;height:150px">
+              </a>
+            @endif
+
         </div>
         <div class="col-sm footer-links">
           <h4>NÜTZLICH</h4>
           <ul>
+
+            @if(PageFeatureEnum::HOME->is_enabled())
             <li><i class="bx bx-chevron-right"></i><a href="{{ route('main') }}">Home</a></li>
+            @endif
+
+            {{-- @if(PageFeatureEnum::HOME->is_enabled())
             <li><i class="bx bx-chevron-right"></i><a href="{{ route('portfolio-image') }}">Fotogalerie</a></li>
-            <li><i class="bx bx-chevron-right"></i><a href="{{ route('portfolio-video') }}">Videogalerie</a></li>
-            <li><i class="bx bx-chevron-right"></i><a href="{{ route('job') }}">Jobs</a></li>
+            @endif --}}
+            
+            @if(PageFeatureEnum::VIDEO_GALLERY->is_enabled())
+              <li><i class="bx bx-chevron-right"></i><a href="{{ route('portfolio-video') }}">Videogalerie</a></li>
+            @endif 
+
+            @if(PageFeatureEnum::JOBS->is_enabled())
+              <li><i class="bx bx-chevron-right"></i><a href="{{ route('job') }}">Jobs</a></li>
+            @endif
+
           </ul>
         </div>
-        @isset($categories)
-        <div class="col-lg-3 col-md-12 footer-links">
-          <h4>SERVICES</h4>
-          <ul>
-            @foreach($categories as $category)
-            <li><i class="bx bx-chevron-right"></i><a
-                href="{{ route('portfolio-image-category',$category->id) }}#bildergaleries">{{ $category->name }}</a>
-            </li>
-            @endforeach
-          </ul>
-        </div>
-        @endisset
+
+        @if(PageFeatureEnum::SERVICES->is_enabled())
+          @isset($categories)
+          <div class="col-lg-3 col-md-12 footer-links">
+            <h4>SERVICES</h4>
+            <ul>
+              @foreach($categories as $category)
+              <li><i class="bx bx-chevron-right"></i><a
+                  href="{{ route('portfolio-image-category',$category->id) }}#bildergaleries">{{ $category->name }}</a>
+              </li>
+              @endforeach
+            </ul>
+          </div>
+          @endisset
+        @endif 
+
+
         <div class="col-sm footer-links">
           <h4>WICHTIG</h4>
           <ul>
             <li><i class="bx bx-chevron-right"></i> <a href="{{ route('privacy_policy') }}">Datenschutz</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="{{ route('imprint') }}">Impressum</a></li>
-            <li><i class="bx bx-chevron-right"></i><a href="{{ route('main') }}#Kontakt">Kontakt</a></li>
+            @if(PageFeatureEnum::HOME_CONTACT->is_enabled())
+              <li><i class="bx bx-chevron-right"></i><a href="{{ route('main') }}#Kontakt">Kontakt</a></li>
+            @endif
 
           </ul>
         </div>

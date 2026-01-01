@@ -261,6 +261,7 @@
                         <div class="feature-toggles">
                             <!-- Page Toggles -->
                             <h6 class="fw-semibold mb-3 text-uppercase small text-muted">Pages</h6>
+                            
                             @foreach($pageFeatures as $feature)
                             @if(str_starts_with($feature->value, 'page-') && !str_contains($feature->value, 'home-'))
                             <div class="form-check form-switch mb-3">
